@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>Googling Data in Clouds: Cloud Search System Stats</title>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="/static/js/stats.js"></script>
+<script type="text/javascript">
+	var procs = $procs
+</script>
+<link type="text/css" rel="stylesheet" href="/static/css/cloudsearch.css"/>
+</head>
+<body onload="javascript:initHTML()">
+	<h1 id="searchTitle"><a href="/"><img src="/static/images/cloudsearch_cloud.png" title="cloudsearch"/></a> System Stats (<a href="/cloudView">CloudView</a>)</h1>
+
+	<label>On $server:</label>
+	<table id="procTable">
+		<tr>
+			<th>Process</th>
+			<th>Status</th>
+			<th>CPU</th>
+			<th>Memory</th>
+			<th></th>
+		</tr>
+	</table>
+	<div>Sensor objects: <button id="dumpColl">dump</button></div>
+</body>
+</html>

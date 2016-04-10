@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>Googling Data in Clouds: Visualizations</title>
+<link type="text/css" rel="stylesheet" href="/static/css/cloudsearch.css"/>
+<script type="text/javascript" src="/static/js/search.js"></script>
+</head>
+<body>
+<div id='loading' class='hidden' style='position:absolute; left: 50%; top: 50%; margin: -200px 0px 0px -200px;  z-index: 1050;'>
+		<img src="/static/images/loading.gif"></img>
+	</div>
+<div id="topBar" class="clear">
+ 	<a name="CloudSearch Help Page" href="/help" class="topLink">Help</a>
+	<a name="CloudSearch Settings Page" href="/settings" class="topLink">Settings</a>
+	<a name="CloudSearch VMExplorer Page" href="/tree" onclick="javascript:loading()" class="topLink">Explore</a>
+	<a name="CloudSearch" href="/" class="topLink">CloudSearch</a>
+</div>
+<div class="clear">
+<a href="/" id="searchTitle" class="bigSearch"><img src="/static/images/cloudsearch_cloud.png" title="cloudsearch"/></a>
+<h1 id="pageTitle">Help</h1><br>
+</div>
+<div class="clear"></div>
+<h2 id="matchQuery" class="exampleTitle">Matching</h2>
+<ul class="exampleList">
+	<li>
+		<div class="text">
+			<h3 id="keyword">Keyword</h3>
+			<p> 
+			Keyword queries are created by entering one or more keywords separated by whitespace.
+			Results are ranked and returned based on how well they match the set of keyword query terms.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="cloud-1 server" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li>
+	<li>
+		<div class="text">
+			<h3 id="conditional">Conditional</h3>
+			<p> 
+			Conditional operators may also be used in query terms to find objects.
+			Attributes with string or boolean values may use the equivalence operator: <span class="code">=</span>.
+			Attributes with numerical or date values, may use the following operators: 
+				<span class="code">&gt;</span>, 
+				<!--span class="code">&gt;=</span-->
+				<span class="code">=</span>, 
+				<!--span class="code">&lt;=</span--> 
+				<span class="code">&lt;</span>. 
+				<!--span class="code">!=</span-->
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="object-type=process cpu-load>50" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li>
+	<!--li>
+		<div class="text">
+			<h3 id="regex">Regular Expressions</h3>
+			<p> 
+			For attributes with string values, a regular expression may also be used in a conditional query term.
+			Regular expressions are indicated by prepending the regex string with <span class="code">@</span>.	
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="object-type=server + server-name=@cloud-[67]" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li-->
+	<li>
+		<div class="text">
+			<h3 id="boolean">Advanced Boolean</h3>
+			<p> 
+			By default all queries entered into the search interface are treated as boolean AND queries.
+			This default can be overrided by specifically declaring an OR query with the OR operator <span class="code">or</span>.
+			Boolean OR and AND queries can be combined using nesting with parantheses.
+			Advanced boolean queries do not use partial matching and ranking.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="customer (springfield or stockholm)" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li>
+	<li>
+		<div class="text">
+			<h3 id="link">Link</h3>
+			<p>
+			A query can also specify that linking operations be performed.
+			To find all objects directly linked to a subset of objects, prepend the query which finds this subset with the link operator: <span class="code">link</span>.
+			Additional query terms can be placed to the left of this operator, to filter the type of linked objects desired.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="vm link(src-ip , flow bandwidth > 100000)" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li>
+</ul>
+
+<div class="clear"></div>
+<h2 id="functions" class="exampleTitle">Projection and Aggregation Functions</h2>
+<ul class="exampleList">
+	<li>
+		<div class="text">
+			<h3 id="projection">Projection</h3>
+			<p> 
+			Additional functions may be performed on the returned data by providing a projection string.
+			The simplest form of projection causes only requested attribute value pairs of cloud search objects to be returned.
+			This is performed by adding a whitespace delimited list of the attributes, prepended with the projection operator: <span class="code">project</span>.
+			Partial matching and ranking is not performed on queries that contain a projection string.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="project(cpu-cores linux-distribution uptime , object-type=server)" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li>
+	<!--li>
+		<div class="text">
+			<h3 id="sort">Sort</h3>
+			<p> 
+			Sorting may also be applied in the projection string, by using the sort operator, <span class="code">-s</span>, followed by the attribute on which sorting should be performed.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="&quot;-p server-name uptime -s server-name&quot; &quot;object-type=server&quot;" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li-->
+	<!--li>
+		<div class="text">
+			<h3 id="limit">Limit</h3>
+			<p> 
+			A limit may also be applied, by using the limit operator, <span class="code">-l</span> (lowercase L), followed by an integer indicating the number of results to be returned.
+			This parameter will override any limits set in the CloudSearch settings.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="&quot;-p server-name uptime -l 2&quot; &quot;object-type=server&quot;" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li-->
+	<!--li>
+		<div class="text">
+			<h3 id="group">Group By</h3>
+			<p>
+			Cloud search results may be grouped using the group by operators using the following format:
+			<span class="code">-g x^Y -b z</span>, 
+			where <span class="code">x</span> is the attribute to be grouped,
+			<span class="code">Y</span> is the aggregation function, and
+			<span class="code">z</span> is the attribute which forms the group.
+			Available group-by aggregation functions are:
+			<ul class="sublist">
+				<li><span class="code">A</span> - sum</li>
+				<li><span class="code">MAX</span> - maximum</li>
+				<li><span class="code">MIN</span> - minimum</li>
+				<li><span class="code">C</span> - count (default if no function supplied)</li>
+			<ul>
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="&quot;-p -g cpu-cores^A memory^A -b server-name&quot; &quot;object-type=vm&quot;" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li-->
+	<li>
+		<div class="text">
+			<h3 id="group">Aggregation</h3>
+			<p>
+			Cloud search results may be aggregated using the aggregate operators using the following format:
+			<span class="code">Y(x ..., Query) </span>, 
+			where <span class="code">x</span> is the attribute to be aggregated,
+			<span class="code">Y</span> is the aggregation function.
+			Available aggregation functions are:
+			<ul class="sublist">
+				<li><span class="code">sum</span> - sum</li>
+				<li><span class="code">max</span> - maximum</li>
+				<li><span class="code">min</span> - minimum</li>
+				<li><span class="code">count</span> - count</li>
+			<ul>
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="sum(cpu-cores memory , object-type=vm)" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li-->
+	<!--li>
+		<div class="text">
+			<h3 id="aggregation">Other Aggregation</h3>
+			<p> 
+			One additional aggregation function, <span class="code">unique</span> - unique.
+			This function returns only unique results.
+			</p>
+		</div>
+		<div class="example">
+			<h4>Try it</h4>
+			<form action="/" method="post" target="_blank">
+			<input class="match" name="query" type="text" value="-aggr(unique(object-type)) (object-type)" />
+			<button class="freeSearchButton" type="submit"/>
+			</form>
+		</div>
+	</li-->
+</ul>
+</ul>
+	<div class='hidden' id="backdrop"></div>
+</body>
+</html>

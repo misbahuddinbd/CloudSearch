@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>Googling Data in Clouds: Cloud Search</title>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="/static/js/search.js"></script>
+<script type="text/javascript">
+//	var attrs = $attrs
+	var currAttrs = null //$attrs	
+	var typesAttrs = null // $typesAttrs
+	var query = "$query"
+
+</script>
+
+
+<link type="text/css" rel="stylesheet" href="/static/css/cloudsearch.css"/>
+</head>
+<body onload="javascript:initHTML()">
+	<div id='loading' class='hidden' style='position:absolute; left: 50%; top: 50%; margin: -200px 0px 0px -200px;  z-index: 1050;'>
+		<img src="/static/images/loading.gif"></img>
+	</div>
+	<div id="topBar" class="clear">
+	 	<a name="CloudSearch Help Page" href="/help" class="topLink">Help</a>
+		<a name="CloudSearch Settings Page" href="/settings" class="topLink">Settings</a>
+		<a name="CloudSearch VMExplorer Page" href="/tree" onclick="javascript:loading()" class="topLink">Explore</a>
+		<a name="CloudSearch" href="/" class="topLink">CloudSearch</a>
+	</div>
+	<div class="clear"></div>
+	<h1 id="searchTitle"><a href="/"><img src="/static/images/cloudsearch_cloud.png" title="cloudsearch"/></a><span id="totalObjs" title="Click to update"></span>
+	<!--a href="/stats" id="statsLink">X</a-->
+	</h1>
+	<!--div id="structuredSearch" class="big rightBorder">
+		<h2>Structured Search</h2>
+
+		Search for <select id="objectTypes"></select>
+
+		<div class="clear">&nbsp;</div>
+
+		Match subquery attributes:
+		<table id="matchTable" class="nostyle">
+		<tr><td>
+			<select id="matchSelect0"></select>
+			<select id="matchOp0"><option>=</option><option>&gt;</option><option>&lt;</option>
+				<option>&gt;=</option><option>&lt;=</option><option>!=</option></select>
+			<input id="matchValue0"/>
+			<a id="matchLink0">+</a>
+		</td></tr>
+		</table>
+
+		<div class="clear">&nbsp;</div>
+
+		Link subquery attributes:
+		<table id="linkTable" class="nostyle">
+		<tr><td>
+			<select id="linkSelect0"></select>
+			<select id="linkOp0"><option>=</option><option>&gt;</option><option>&lt;</option>                              			<option>&gt;=</option><option>&lt;=</option><option>!=</option></select>
+			<input id="linkValue0"/>
+			<a id="linkLink0">+</a>
+		</td></tr>
+		</table>
+
+		<div class="clear">&nbsp;</div>
+
+		<table id="projTable" class="nostyle">
+		<tr class="filter"><td class="label">Sort by:</td><td><select id="sort"></select></td></tr>
+		<tr class="filter"><td class="label">Limit:</td><td><input type="text" name="limit" id="limit" /></td></tr>
+		<tr class="filter">
+			<td class="label">Return:</td>
+			<td><select id="projSelect">
+				<option value="objects">Whole objects</option>
+				<option>Selected attributes</option>
+			</select></td>
+		</tr>
+		</table>
+
+		<div class="clear">&nbsp;</div>
+
+		<table id="aggTable" class="nostyle">
+		<tr class="filter">
+			<td class="label">Aggregate:</td>
+			<td>
+				<select id="aggFun">
+					<option value="A">sum</option>
+					<option value="MIN">minimum</option>
+					<option value="MAX">maximum</option>
+					<option value="C">count</option>
+					<option value="U">unique</option>
+				</select>
+				<select id="aggAttr"></select>
+			</td>
+		</tr>
+		<tr class="filter"><td class="label">By:</td><td><select id="by"></select></td></tr>
+		</table>
+		<button id="selectSearchButton" class="searchButton">Search</button>
+	</div-->
+	<div id='freeSearch' class="big">
+		<h2 id="freeSearchTitle"></h2>
+		<div id="freeQueryBox" class="queryBox">
+			<!-- label>Command line</label><a href="#" id="addLink">add Link ?</a>
+			<textarea id="match" class="queryBox"></textarea>
+			<button id="freeSearchButton"></button-->
+		</div>
+	</div>
+	<!--img src="/static/images/CiscoSystems.gif" style="margin:34px 10px 0 5px; float:right" height="25px" title="Cisco"/></img-->
+	<img src="/static/images/KTH_logo.jpg"  style="margin:15px 10px;float:right" width="60px" title="KTH"/></img>
+
+
+	
+	<div id="savedSearches">
+		<div id="recentSearchesTitle"></div>
+			<ul>
+				<script>
+
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+					  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+					  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.open("GET","/static/xml/sampleQuery.xml",false);
+					xmlhttp.send();
+					xmlDoc=xmlhttp.responseXML;
+				
+					var x=xmlDoc.getElementsByTagName("QUERY");
+					for (i=0;i<x.length;i++)
+					  {
+					  var samplequery = x[i].childNodes[0].nodeValue;
+					  document.write("<li><a href=\"javascript:runRecent(\'");
+					  document.write(samplequery);
+					  document.write("\')\">");
+					  document.write(samplequery);
+					  document.write("</a></li>");
+		
+					  }
+				</script>
+
+			</ul>
+
+		<ul id="recentSearches" class="hidden"></ul>
+		<p>
+		<div id="currentSetting">
+			<label> Settings for matching and ranking</label><p>
+			<ul id="recentSearches"></ul>
+			<text id="currentSettingLabel" style="color: rgb(153, 153, 153);">
+			<script>
+			        if (getCookie('Approximate') != 'false'){
+					document.write("Approximate matching");
+                                        document.write("<p></p>");
+			        }else{
+					document.write("Exact matching");
+                                        document.write("<p></p>");
+			        }
+				document.write("Ranking weights :");
+				document.write("<br> </br>");
+
+			        if (getCookie('TopK')) {}
+			        if (getCookie('tf') && getCookie('nr') && getCookie('tr')){
+	                                document.write("EPR : ");
+	                                document.write(getCookie('tf')); 				
+	                                document.write(" NR : ");
+	                                document.write(getCookie('nr')); 				
+	                                document.write(" TR : ");
+	                                document.write(getCookie('tr')); 				
+				}else{
+        	                        document.write("EPR : 5 NR : 5 TR : 5");
+				}
+			</script>
+			</text>
+		</div>
+		<p>
+		<!--div id="CannedSearch">
+			<label>Canned Searches</label><p>
+			<ul>
+				<li>
+					<a href="javascript:runRecent('10.10.6.71 + 10.10.6.72')">10.10.6.71 + 10.10.6.72</a>
+				</li>
+				<li>
+					<a href="javascript:runRecent('10.10.6.71 + 10.10.6.72 + vm')">10.10.6.71 + 10.10.6.72 + vm</a>
+				</li>
+                                <li>
+                                        <a href="javascript:runRecent('10.10.6.71 + 10.10.6.72 + bandwidth>100000')">10.10.6.71 + 10.10.6.72 + bandwidth>100000</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('flow + bandwidth>100000')">flow + bandwidth>100000</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('(object-type=vm) + link_(src-ip) (flow + bandwidth > 100000)')">(object-type=vm) + link_(src-ip) (flow + bandwidth > 100000)</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('(object-type=vm) + link_(src-ip) (10.10.6.71 + bandwidth > 100000)')">(object-type=vm) + link_(src-ip) (10.10.6.71 + bandwidth > 100000)</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('(customer) + link (ns:instance-00027a41)')">(customer) + link (ns:instance-00027a41)</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('max(bandwidth) (object-type=flow)')">max(bandwidth) (object-type=flow)</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('sum(packets) (flow + bandwidth>100000)')">sum(packets) (flow + bandwidth>100000)</a>
+                                </li>
+                                <li>
+                                        <a href="javascript:runRecent('(object-type=vm) + link_(src-ip) (flow + bandwidth > 1000000)')">(object-type=vm) + link_(src-ip) (flow + bandwidth > 1000000)</a>
+                                </li>
+
+			</ul>
+		</div-->
+		<p>
+		
+		<div id="ads" class="hidden">
+			<text style="color: grey;font-size:small">Ads</text><br>
+			<a href="www.cisco.com/Cloud"><u>Connecting to the cloud - Cisco.com</u></a><br>
+			<text style="color: green;font-size:small"> www.cisco.com/Cloud </text><br>
+			<text style="color:black;font-size:13px"> Learn how you can safely connect your network to the cloud.</text>
+			<br><br>
+			<a href="www.rackspace.co.uk/openstack"><u>Openstack - rackspace.co.uk</u></a><br>
+			<text style="color: green;font-size:small"> www.rackspace.co.uk/openstack </text><br>
+			<text style="color:black;font-size:13px"> OpenStack Ready Cloud Servers from only $ 0.48/Day!.</text>
+						
+		</div>
+		<!--<img id="ad1" src="/static/images/fakead.png" class="ad hidden" />
+		<img id="ad2" src="/static/images/fakead.png" class="ad hidden" />
+		-->
+	</div>
+	
+	<!--div id="attributes" class="little leftBorder">
+		<h2 id="attrType">Attributes</h2>
+		<ul id="attrList"></ul>
+	</div-->
+
+	<div id="query" class="queryView" ></div>
+	<div id="mongo" class="queryView" ></div>
+	<!--div id="topK">Show  
+		<span>10</span>
+		| <span class="selected">20</span> 
+		| <span>50</span>
+		| <span>100</span>
+		| <span>all</span>
+		results
+	</div--> 
+	<div id="queryMeta"></div>
+	<div class="double" id="queryResults"></div>
+	<div class='hidden' id="backdrop"></div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+#!/bin/bash
+#kth-lcn-opdata-in-clouds/update $@
+#sudo su user
+
+# update itself first
+/home/amy/kth-lcn-opdata-in-clouds/update $@
+
+for i in {2..9}
+#for i in {9..9}
+do
+	#echo "Updating cloud-$i: with $@"
+	ssh user@cloud-$i "/home/user/amy/kth-lcn-opdata-in-clouds/update $@" &
+	#if [ $i -ne 3 ]; then ssh user@cloud-$i "/home/user/amy/kth-lcn-opdata-in-clouds/update $@" &  fi
+done
+#exit

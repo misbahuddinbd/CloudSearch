@@ -1,0 +1,70 @@
+#infovis-canvaswidget {
+  margin:25px 0 0 25px;
+}
+
+/* Customization to the hypertree presentation */
+h4 {
+	color:#058DC7;
+}
+.appLink {
+	float: left;
+	width:100%;
+	text-align: left;	
+	margin: 10px 0 0;
+}
+#right-container label {
+	margin: 0 6px 0 0;
+	font-weight: bold;
+}
+input {
+	width: 130px;
+}
+input#addImages {
+	float:right;
+	width:15px;
+	margin-right:86px;
+}
+#tree-description {
+	margin:7px;
+}
+
+/* Adding the other graph to the page too */
+#container {
+	width:1100px;
+}
+#left-container {
+	width:199px;
+}
+#right-container {
+	width:300px;
+}
+#right-container h4 {
+	margin-bottom: 2px;
+}
+ul#link-list {
+	padding: 4px; margin: 0;
+}
+ul#link-list li {
+	padding: 0; margin: 0;	
+	width: 50%;
+	float: left;
+}
+label.link {
+	/*color:#24CBE5;  Highcharts[4] */
+	color:#23A4FF; /* Jit default h4 */
+}
+label.link:hover {
+	text-decoration: underline;
+}
+.type {
+	font-size: 85%;
+	font-weight: normal;
+	color: #999;
+}
+#util-chart-container {
+	clear:both;
+	/*width:200px;*/
+	height:200px;
+	text-align:center;
+}
+

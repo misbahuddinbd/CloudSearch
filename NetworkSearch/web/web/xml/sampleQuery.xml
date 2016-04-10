@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<QUERYSET>
+<QUERY>
+object-type=vm
+</QUERY>
+
+<QUERY>
+10.10.11.171
+</QUERY>
+
+<QUERY>
+10.10.11.171 10.10.11.166
+</QUERY>
+
+<QUERY>
+10.10.11.171 10.10.11.166 vm
+</QUERY>
+
+<QUERY>
+flow bandwidth>100000
+</QUERY>
+
+<QUERY>
+(image) link(object-name , 10.10.11.171)
+</QUERY>
+
+<QUERY>
+(vm) link(src-ip , flow bandwidth > 100000)
+</QUERY>
+
+<QUERY>
+max(bandwidth , object-type=flow)
+</QUERY>
+
+<QUERY>
+sum(packets , flow bandwidth>100000)
+</QUERY>
+
+
+<QUERY>
+max(cpu-load , object-type=vm)
+</QUERY>
+
+<QUERY>
+max(cpu-load , object-type=server)
+</QUERY>
+
+<QUERY>
+project(cpu-load memory-load , object-type=vm)
+</QUERY>
+
+<QUERY>
+project(cpu-load memory-load , object-type=server)
+</QUERY>
+
+</QUERYSET>

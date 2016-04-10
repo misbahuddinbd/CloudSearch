@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>Googling Data in Clouds: Visualizations</title>
+<link type="text/css" rel="stylesheet" href="/static/css/cloudsearch.css"/>
+<script type="text/javascript" src="/static/js/search.js"></script>
+<script type="text/javascript">
+function init() {
+	if (getCookie('Approximate') != 'false'){
+		document.getElementById('Approximate').checked = true;
+	}else{
+		document.getElementById('Exact').checked = true	
+	}
+	if (getCookie('TopK')) document.getElementById('TopK').value = getCookie('TopK')
+	if (getCookie('tf')) document.getElementById('tf').value = getCookie('tf')
+	if (getCookie('nr')) document.getElementById('nr').value = getCookie('nr')
+	if (getCookie('tr')) document.getElementById('tr').value = getCookie('tr')
+	if (getCookie('showRank') != 'false') document.getElementById('showRank').checked = true
+	
+	document.getElementById('saveSettingsButton').onclick = function () 
+	{
+		//document.getElementById('pageTitle').innerHTML = document.getElementById('TopK').value
+		addSettingsCookie('Approximate',document.getElementById('Approximate').checked) 
+		addSettingsCookie('TopK',document.getElementById('TopK').value) 
+		addSettingsCookie('tf',document.getElementById('tf').value)
+		addSettingsCookie('nr',document.getElementById('nr').value)
+		addSettingsCookie('tr',document.getElementById('tr').value)
+		addSettingsCookie('tr',document.getElementById('tr').value)
+		addSettingsCookie('showRank',document.getElementById('showRank').checked) 
+	}
+}
+</script>
+</head>
+<body onload="init()">
+<div id='loading' class='hidden' style='position:absolute; left: 50%; top: 50%; margin: -200px 0px 0px -200px;  z-index: 1050;'>
+		<img src="/static/images/loading.gif"></img>
+	</div>
+<div id="topBar" class="clear">
+ 	<a name="CloudSearch Help Page" href="/help" class="topLink">Help</a>
+	<a name="CloudSearch Settings Page" href="/settings" class="topLink">Settings</a>
+	<a name="CloudSearch VMExplorer Page" href="/tree" onclick="javascript:loading()" class="topLink">Explore</a>
+	<a name="CloudSearch" href="/" class="topLink">CloudSearch</a>
+</div>
+<div class="clear">
+<a href="/" id='searchTitle' class="bigSearch"><img src="/static/images/cloudsearch_cloud.png" title="cloudsearch"/></a>
+<h1 id="pageTitle">Settings</h1>
+</div>
+<div class="clear"></div>
+
+<ul class="exampleList settingsList">
+	<li>
+		<label>Max search results : </label>
+		<input id="TopK" value="100"  style="width:40px"/>
+	</li>
+	<li>
+		<label>Query matching : </label>
+		<input type="radio" name="Approximate" id="Exact" />
+		<label>Exact</label>
+		<input type="radio" name="Approximate" id="Approximate" />
+		<label>Approximate</label>
+	</li>
+	<li>
+		<label>Weight for rank metrics : </label><br>
+		
+		<table style="border:0px; font-size:small">
+			<tr>
+				<td>
+					<label>Extended boolean retrieval  </label>
+				</td>
+				<td>				
+				<input id="tf" value="5" style="width:40px" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Name resolution  </label>
+				</td>
+				<td>				
+				<input id="nr" value="5" style="width:40px"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Type resolution  </label>
+				</td>
+				<td>				
+				<input id="tr" value="5" style="width:40px" />
+				</td>
+			</tr>							
+		</table>
+	</li>
+	<li>
+		<label>Show rank scores : </label>
+                <input id="showRank" type="checkbox" />
+	</li>
+
+</ul>
+<button id="saveSettingsButton">Save and return</button>
+	<div class='hidden' id="backdrop"></div>
+</body>
+</html>

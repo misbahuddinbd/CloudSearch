@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>Googling Data in Clouds: Visualizations</title>
+<link type="text/css" rel="stylesheet" href="/static/css/base.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/hypertree.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/cloudsearch.css"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/highcharts.js"></script>
+<script type="text/javascript" src="/static/js/jit.js"></script>
+<script type="text/javascript" src="/static/js/search.js"></script>
+<script type="text/javascript" src="/static/js/$treeType.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript">
+	var json = $tree
+	var treeId = "$treeId"
+	var treeType = "$treeType"
+	var root = decodeURIComponent("$root")
+	//var servers = $servers
+	//var customers = $customers
+</script>
+
+</head>
+<body onload="javascript:init()">
+
+<div id="topBar" class="clear">
+ 	<a name="CloudSearch Help Page" href="/help" class="topLink">Help</a>
+	<a name="CloudSearch Settings Page" href="/settings" class="topLink">Settings</a>
+	<a name="CloudSearch VMExplorer Page" href="/tree" class="topLink">Explore</a>
+	<a name="CloudSearch" href="/" class="topLink">CloudSearch</a>
+</div>
+
+<div class="clear">
+<p class="subTopLink">powered by CloudSearch</p>
+<!--a href="/" id='searchTitle' class="bigSearch"><img src="/static/images/cloudsearch_cloud.png" title="cloudsearch"/></a-->
+<h1 id="vmExplorerPageTitle">Exploratory Data Analytics</h1>
+</div>
+<div class="clear"></div>
+
+	<div id="container">
+		<div id="left-container">
+			<div id="tree-description">
+				<!--h4 id="animationTitle">Exploratory Data Analysis</h4-->
+				<!--This graph illustrates cloud resource allocations. 
+				Choose to begin exploration from a server, virtual machine or customer, and filter if desired.<br /><br />
+				Properties and linked objects are listed in the right column.  
+				Clicking on an object moves the tree and centers that object.
+				Refresh the page to see the current objects and links.
+				-->
+
+				<br />
+				<br />
+				<!--select id="selectCustom">
+					<!--option id="serverType">server</option-->
+					<!--option id="vmType">vm</option-->				
+
+					<!--option id="customerType">customer</option-->
+					<!--option id="flowType">flow</option-->
+				</select-->
+				<br />
+				Filter: <input id="CustomRoot" />
+				<!--Add images: <input type="checkbox" id="addImages" /-->
+				<!--a id="ServerVMCust" href="/tree?tree=ServerVMCust" class="appLink hidden">Server - VM - Customer</a>
+				Focus: <input id="ServerVMCustRoot"></input-->
+				<!--a id="ServerVMImage" href="/tree?tree=ServerVMImage" class="appLink hidden">Server - Virtual Machine - Image</a-->
+
+				<!--a id="CustVMServer" href="/tree?tree=CustVMServer" class="appLink hidden">Customer - VM - Server</a>
+				Focus: <input id="CustVMServerRoot"></input-->
+				<!--a id="CustVMImage" href="/tree?tree=CustVMImage" class="appLink hidden">Customer - Virtual Machine - Image</a-->
+				<!--a id="Object" href="/tree?tree=Object" class="appLink hidden">All Object Links</a-->
+			</div>
+
+			<table id="selectionType" class="hidden">
+			    <tr>
+				<td><label for="s-normal">Normal </label></td>
+				<td><input type="radio" id="s-normal" name="selection" value="normal"  checked="checked" /></td>
+			    </tr>
+			    <tr>
+				 <td><label for="s-root">Set as Root </label></td>
+				 <td><input type="radio" id="s-root" name="selection" value="root" /></td>
+			    </tr>
+			</table>
+			<div id="id-list"></div>
+		</div>
+		<div id="center-container">
+			<div id="infovis"></div>    
+		</div>
+		<div id="right-container">
+			<div id="inner-details"></div>
+			<div id="util-chart-container"></div>
+			<div id="mig-chart-container"></div>
+		</div>
+
+		<div id="log" class="hidden"></div>
+	</div>
+	<!--div id="chart-container"></div-->
+</body>
+</html>

@@ -1,0 +1,420 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	background-image:url(../images/bg.png);
+	background-repeat:repeat-x;
+}
+h1,h2,h3,h4 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+code {
+    font-family: Arial, Helvetica, sans-serif;
+    color:#000080;
+}
+.bigSearch{
+	float: left;
+	margin:0;
+}
+table, td {
+	border: 1px solid black;
+}
+td.list {
+	width: 800px;
+}
+td.num {
+	text-align: right;
+}
+.error {
+	color: red;
+}
+.nonresponsive {
+	color: gray;
+}/*
+#snapshot td {
+	border: 0;
+	width: 50%;
+	margin: 0 10px;
+	align: top;
+}
+#snapshot table {
+	border: 0;
+}*/
+.left {
+	float:left;
+}
+.right{
+	float:right;
+}
+
+.hidden {
+	display:none;
+}
+.box {
+	display:box;
+}
+#query {
+	margin-top:40px;
+}
+#query button {
+	margin: 20px;
+}
+.queryBox {
+	width: 90%;
+	float: left;
+	margin: 0 0 10px 10px;
+	resize: none;
+}
+.queryBox textarea {
+	height: 100px;
+	float:left;
+}
+.queryBox label {
+	float:left;
+	margin: 0 10px;
+}
+#queryResults {
+	width: 50%;
+	margin: 0 20px 20px;
+	padding: 20px 0;
+}
+#queryResults h3 {
+	margin-left: 40px;
+}
+#queryResults li {
+	float:left;
+}
+ul li {
+	list-style: none;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+ul li div.resultNum {
+	float: left;
+	clear: left;
+	/*margin: 0 0 0 20px;*/
+	margin:	4px -30px 0;
+	width: 30px;
+	color:	#999;
+}
+ul tr.r0 {
+	background-color: #f0f0ff;
+}
+ul tr.r1 {
+	background-color: #d2d2ff;
+}
+ul td {
+	border: 0;
+	min-width: 200px;
+}
+.queryView {
+	float:left;
+	display: none;
+	max-width: 60%;
+	padding: 10px; margin: 10px;
+	border: 1px dashed gray;
+}
+
+#statsLink {
+	color: white;
+}
+
+/* Search Page */
+#topBar {
+	width: 97%;
+}
+.topLink {
+	display:block;
+	float:right;
+	margin: 0 20px;
+	color: white; 
+	font-size: 12px;
+}
+.clear {
+	width: 100%;
+	clear: both;
+}
+.big {
+	width: 40%;
+	float: left;
+	padding: 0 10px;
+}
+.rightBorder {
+	border-right: 1px dashed black;
+}
+.leftBorder {
+	border-left: 1px dashed black;
+}
+.bottBorder {
+	border-bottom: 1px dashed black;
+}
+.double {
+	margin: 5px 0;
+	width: 80%;
+	float: left;
+}
+.center {
+	text-align: center;
+}
+.little {
+	width: 15%;
+	float: right;
+	padding: 0 10px;
+}
+.filter .label {
+	width: 100px;
+	text-align: right;
+	padding-right: 10px;
+}
+#aggTable .filter .label {
+	width: 140px;
+}
+#limit,#sort,#projSelect {
+	width: 200px;
+}
+.nostyle, .nostyle td, .nostyle tr {
+	border: 0px;
+	text-decoration: none;
+}
+/* Can't get the the padding (?) to be the same from orig to js added match rows */
+.searchButton {
+	float: right;
+	height: 35px; width: 100px;
+	font-size: 20px;
+	margin: 20px 0 0 0;
+}
+#attrList {
+	margin: 0; padding: 0;
+}
+#attrList li {
+	margin: 0; padding: 0;
+	font-size: 80%;
+}
+#queryView {
+	min-width: 240px;
+}
+#addLink  {
+	float: right;
+	font-size: 12px;
+}
+
+#totalObjs {
+	font-size: 12px;
+	text-decoration: none;
+}
+#savedSearches {
+	float:left;
+	margin: 0 20px;
+	width: 30%;
+}
+#savedSearches.right {
+	float: right;
+}
+	
+#savedSearches ul, #savedSearches ul li, 
+#savedSearchesRight ul, #savedSearchesRight ul li {
+	margin: 3px 0;
+	padding:0;
+	font-size: 12px;
+}
+img.ad {
+	margin:20px 0;
+	width:300px;
+	height:300px;
+	float:left;
+}
+.bigQuery {
+	width: 100%;
+	float:left;
+	margin: 30px 0px 50px 0px;
+}
+input.match {
+	width:80%;
+	float:left;
+	height:35px;
+	font-size:25px;
+}
+.match {
+	width: 80%;
+	float: left;
+}
+.objectBox,
+.objectBox table {
+	width: 550px;
+	/*display:inline;*/
+}
+
+ul td.attr {
+	width:120px;
+}
+
+.linkDiv {
+	clear: both;
+}
+.linkDiv a, #recentSearches a, #topK span, #savedSearches ul li a {
+	font-size: 12px;
+	color: #44f;
+}
+
+a {
+	text-decoration: none;
+	cursor: default;
+}
+a:hover, #topK span:hover {
+	text-decoration: underline;
+	cursor: default;
+}
+#topK span.selected:hover {
+	text-decoration: none;
+}
+#topK span.selected {
+	font-weight: bold;
+	font-size: 14px;
+}
+#topK {
+	width: 300px;
+	float: right;
+}
+#queryMeta {
+    float: left;
+}
+.terms {
+	float: left;
+	display: block;
+	font-size: 10px;
+	margin: 0 5px;
+}
+
+.freeSearchButton {
+	height:	33px; width: 92px;
+	float: left;
+	margin: 7px 0px 0px 20px;
+	background: url(../images/glass_sprite.png) no-repeat;
+	border: None;
+}
+.freeSearchButton:hover {
+	background: url(../images/glass_sprite.png) 0 33px;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0 0 10px;
+    padding: 0;
+}
+
+label.object_type {
+	color: rgb(0, 0, 128);
+	margin-left: 10px;
+}
+
+label.object_name {
+	color: rgb(0, 0, 128);
+	margin-left: 0px;
+/*    text-decoration:none;
+    text-decoration:underline;*/
+    cursor: pointer;
+/*    color: blue;*/
+}
+
+label.rank {
+	color: MediumSeaGreen;
+	margin-left: 10px;
+}
+
+h4 {
+	cursor: pointer;
+}
+
+label.content {
+    /*margin: 0 0 5px 10px;*/
+    margin: 0 0 5px 0px;
+}
+/*h4:hover {
+	text-decoration: underline;
+}*/
+
+/* VMExplorer */
+.subTopLink{
+    float:right;
+    margin: 10px;
+    font-size:12px;
+}
+
+#vmExplorerPageTitle {
+    text-align: center;
+    padding: 30px 50px;
+    font-family:Georgia, serif;
+    
+}
+/* Help, Settings */
+#pageTitle {
+	padding: 10px 50px;
+	float:right;
+}
+
+.exampleList, .exampleTitle {
+	width: 90%;
+	margin: auto;
+	padding:0;
+}
+.exampleTitle {
+	margin-top: 40px;
+}
+.exampleList li {
+	width: 100%;
+	border-bottom: 1px solid #DDD;
+	float:left;
+	clear:both;
+}
+.exampleList h4 {
+	font-size: 16px;
+	padding: auto;
+}
+.text, .example {
+	width: 45%;
+	float: left;
+}
+.example {
+	margin: 20px 0;
+	float: right;
+}
+
+.code {
+	font-family: courier;
+	color: #111;
+}
+ul.sublist, ul.sublist li {
+	margin: 0 0 0 10px;
+	padding: 0;
+	border: 0;
+}
+.settingsList li {
+	border:0;
+}
+#saveSettingsButton {
+	margin-left: 35%;
+}
+input#rank {
+	width: 15px;
+}
+
+#searchTitle {
+    margin: 14px 0 0 0;
+}
+
+#ads{
+    background-color: Bisque ;
+    width: 90%;
+    padding:15px;
+   
+}
+
+#backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+  opacity: 0.8;
+}

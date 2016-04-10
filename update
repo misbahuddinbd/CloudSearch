@@ -1,0 +1,69 @@
+#!/bin/bash
+# update.sh - to update the code on this server and start/stop the services
+# usage: 
+# 	./update.sh	up		# svn update all files
+#	./update.sh	upstart q	# to svn update and restart only the query service
+#	./update.sh	start 	sq	# start/restart sensormanager and query service
+#	./update.sh	stop		# to stop all services	
+
+# Find directory of the script, not the directory we were called from
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Configuration to delete old log files
+DELETE_LOGS=true
+#DELETE_LOGS=false
+
+# Pull command arguments
+PARAM=$1
+
+# Do SVN update, if necessary
+if [[ $PARAM =~ up(.*) ]]
+then
+	# Reassign param to remove 'up'
+	PARAM=${BASH_REMATCH[1]}
+	if [ -z "$2" ]
+	then
+		svn up $DIR
+	else
+		if [[ "$2" == *q* ]]
+		then
+			svn up "$DIR/NetworkSearch/queryInterface"
+		fi
+		if [[ "$2" == *s* ]]
+		then
+			svn up "$DIR/NetworkSearch/SensingSubsystem"
+		fi
+	fi
+fi
+
+
+# Always execute restart to avoid having multiple processes
+if [[ "$PARAM" == *start* ]]
+then
+	
+	PARAM='restart'
+fi
+
+# Perform operation on applications
+if [ $PARAM ]
+then
+        if [[ -z "$2" || "$2" == *q* ]]
+        then
+                cd "$DIR/NetworkSearch/queryInterface"
+                python queryListener.py $PARAM $3 #if $3 == 'profile' then perform profiling
+        fi
+        if [[ -z "$2" || "$2" == *s* ]]
+        then
+                cd "$DIR/NetworkSearch/SensingSubsystem"
+                if $DELETE_LOGS && [ "$PARAM" == 'restart' ]
+                then
+                        rm $DIR/NetworkSearch/SensingSubsystem/logs/*
+                fi
+                python sensormanager.py $PARAM
+        fi
+fi
+
+
+
+
+

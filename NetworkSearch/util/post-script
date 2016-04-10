@@ -1,0 +1,24 @@
+master:
+
+#!/bin/bash
+python /home/ubuntu/flowSimulate.py start master
+
+
+evil:
+
+#!/bin/bash
+python /home/ubuntu/flowSimulate.py start eveClient -mip 10.10.13.129 -tr 10000 -si 0.4 -flowgen 10 -flowlife 5
+
+(old -flowgen 2)
+
+server:
+
+#!/bin/bash
+python /home/ubuntu/flowSimulate.py start server -mip 10.10.13.129 -tr 40000 -si 0.2 -flowgen 2 -flowlife 60
+
+Normal:
+
+#!/bin/bash
+python /home/ubuntu/flowSimulate.py start client -mip 10.10.13.129 -tr 1000 -si 0.5 -flowgen 2 -flowlife 30 -ctr 1000 -csi 0.5 -cflowgen 5 -cflowlife 20
+
+

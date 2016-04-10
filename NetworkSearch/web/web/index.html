@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+<title>Googling Data in Clouds: CloudView</title>
+<link type="text/css" rel="stylesheet" href="/static/css/cloudsearch.css"/>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="/static/js/search.js"></script>
+<script type="text/javascript">
+	var names = $names
+	var serverVMs = $serverVMs
+</script>
+</head>
+<body onload="javascript:initCloudView()">
+<div id='loading' class='hidden' style='position:absolute; left: 50%; top: 50%; margin: -200px 0px 0px -200px;  z-index: 1050;'>
+		<img src="/static/images/loading.gif"></img>
+	</div>
+	<h1>CloudView</h1>
+	<div id="numbers">
+		<h2>Cloud Statistics <span class="nostyle"><a href="/">CloudSearch</a></span></h2>
+		<table>
+			<tr>
+				<td>Servers in cloud search system</td>
+				<td id="serverNameCount" class="num">$serverCount</td>
+				<td id="serverName" class="list">$serverNamesNice</td>
+				<td><button onclick="javascript:updateNumList('serverName', 'getServerNameList')">update</button></td>
+				
+			</tr>
+			<tr>
+				<td>Private Cloud</td>
+				<td id="privCloudNameCount" class="num">$privCloudCount</td>
+				<td id="privCloudName" class="list">$privCloudNames</td>
+				<td><button onclick="javascript:updateNumList('privCloudName', 'getPrivCloudNameList')">update</button></td>
+				
+			</tr>
+			<tr>
+				<td>Public Cloud</td>
+				<td id="pubCloudNameCount" class="num">$pubCloudCount</td>
+				<td id="pubCloudName" class="list">$pubCloudNames</td>
+				<td><button onclick="javascript:updateNumList('pubCloudName', 'getpubCloudNameList')">update</button></td>
+				
+			</tr>
+			<tr>
+				<td>Active VMs in search system</td>
+				<td id="vmNameCount" class="num">$vmCount</td>
+				<td id="vmName" class="list">$vmNamesNice</td>
+				<td><button onclick="javascript:updateNumList('vmName', 'getVMNameList')">update</button></td>
+			</tr>
+			<tr>
+				<td>Idle servers (no VMs)</td>
+				<td id="idleServerCount" class="num">$idleServerCount</td>
+				<td id="idleServer" class="list">$idleServerNames</td>
+				<td><button onclick="javascript:updateNumList('idleServer', 'getIdleServerNameList')">update</button></td>
+			</tr>
+			<tr>
+				<td>Underused servers (CPU/Mem)</td>
+				<td id="underusedServerCount" class="num">$underusedServerCount</td>
+				<td id="underusedServer" class="list">$underusedServerNames</td>
+				<td><button onclick="javascript:updateNumList('underusedServer', 'getUnderusedServerNameList')">update</button></td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="averages">
+		<h2>Averages</h2>
+		<table>
+			<tr>
+				<td>Average VMs per active server</td>
+				<td id="avgVmCount" class="num">$avgVmCount</td>
+				<td><button onclick="javascript:updateNumList('avgVm', 'getAvgVMCount')">update</button></td>
+			</tr>
+			<tr>
+				<td>Average Lifetime of a VM (s)</td>
+				<td id="avgVmUptime" class="num">$avgVmUptime</td>
+				<td><button onclick="javascript:updateNumList('avgVmUptime', 'getAvgVMUptime')">update</button></td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="servers">
+	</div>
+
+	<div id="snapshot">
+		<h2>Snapshot of an object</h2>
+		<select id="typeSelect" onchange="javascript:switchIds(this)"></select>
+		<select id="idSelect" onchange="javascript:snapshot()"></select>
+		<div id="snapshotResults">
+	</div>
+	<div class='hidden' id="backdrop"></div>
+</body>
+</html>
